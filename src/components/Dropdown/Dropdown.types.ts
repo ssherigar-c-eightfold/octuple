@@ -17,6 +17,12 @@ export const TRIGGER_TO_HANDLER_MAP_ON_LEAVE = {
 
 export interface DropdownProps {
   /**
+   * The value of the aria-haspopup attribute to be applied to the reference element, if not already set
+   * and the role of the reference element is not 'combobox'
+   * @default 'true'
+   */
+  ariaHaspopupValue?: string;
+  /**
    * The ref of element that should implement the following props:
    * 'aria-controls', 'aria-expanded', 'aria-haspopup', 'role'
    * @default child
@@ -49,6 +55,7 @@ export interface DropdownProps {
   /**
    * If the dropdown is disabled or not
    */
+  closeOnTab?: boolean;
   disabled?: boolean;
   /**
    * Custom dropdown class names
@@ -114,6 +121,11 @@ export interface DropdownProps {
    */
   positionStrategy?: Strategy;
   /**
+   * The role to be applied to the reference element, if not already set
+   * @default 'button'
+   */
+  referenceRole?: string;
+  /**
    * Callback executed on reference element click.
    * @param event
    * @returns (event: React.MouseEvent) => void
@@ -131,9 +143,10 @@ export interface DropdownProps {
   referenceWrapperClassNames?: string;
   /**
    * The dropdown aria role.
+   * If null, the role will not be applied to the reference element.
    * @default 'listbox'
    */
-  role?: string;
+  role?: string | null;
   /**
    * Callback to control the show/hide behavior of the dropdown.
    * triggered before the visible change
@@ -169,7 +182,7 @@ export interface DropdownProps {
   /**
    * The props of the overlay
    */
-  overlayProps?: HTMLDivElement;
+  overlayProps?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 export type DropdownRef = {
